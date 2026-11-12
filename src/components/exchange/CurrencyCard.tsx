@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+
+import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 
 type CurrencyCardProps = {
   currency: "ETH" | "USD";
@@ -11,12 +12,18 @@ export default function CurrencyCard({
   amount,
   balance,
 }: CurrencyCardProps) {
+  const { width } = useWindowDimensions();
+
   const isEthereum = currency === "ETH";
+
+  const amountFontSize = width < 360 ? 42 : width < 400 ? 48 : 54;
 
   return (
     <View style={styles.currencySection}>
       <View style={styles.currencyHeader}>
-        <View style={isEthereum ? styles.ethereumIcon : styles.dollarIcon}>
+        <View
+          style={isEthereum ? styles.ethereumIcon : styles.dollarIcon}
+        >
           <Text
             style={isEthereum ? styles.ethereumSymbol : styles.dollarSymbol}
           >
@@ -29,7 +36,9 @@ export default function CurrencyCard({
         <Text style={styles.dropdownArrow}>⌄</Text>
       </View>
 
-      <Text style={styles.amount}>{amount}</Text>
+      <Text style={[styles.amount, { fontSize: amountFontSize }]}>
+        {amount}
+      </Text>
 
       <View style={styles.balanceRow}>
         <Text style={styles.balanceLabel}>Balance</Text>
@@ -86,7 +95,6 @@ const styles = StyleSheet.create({
   },
   amount: {
     color: "#F7F5F8",
-    fontSize: 54,
     fontWeight: "300",
     letterSpacing: -1.5,
     marginTop: 12,
