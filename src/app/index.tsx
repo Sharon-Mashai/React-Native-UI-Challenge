@@ -1,8 +1,9 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View,} from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, Text,View,} from "react-native";
 import { useState } from "react";
 import ExchangeHeader from "@/components/exchange/ExchangeHeader";
+import CurrencyCard from "@/components/exchange/CurrencyCard";
 
 export default function HomeScreen() {
   const [isSwapped, setIsSwapped] = useState(false);
@@ -33,31 +34,12 @@ export default function HomeScreen() {
 
             {/* Currency cards */}
             <View style={styles.exchangeCard}>
-              {/* ETH */}
-              <View style={styles.currencySection}>
-                <View style={styles.currencyHeader}>
-                  <View style={styles.ethereumIcon}>
-                    <Text style={styles.ethereumSymbol}>♦</Text>
-                  </View>
-
-                  <Text style={styles.currencyName}>
-                    {isSwapped ? "USD" : "ETH"}
-                  </Text>
-
-                  <Text style={styles.dropdownArrow}>⌄</Text>
-                </View>
-
-                <Text style={styles.amount}>
-                  {isSwapped ? "43,937.4" : "12,695"}
-                </Text>
-
-                <View style={styles.balanceRow}>
-                  <Text style={styles.balanceLabel}>Balance</Text>
-                  <Text style={styles.balanceValue}>
-                    {isSwapped ? "12,987.21" : "293.018"}
-                  </Text>
-                </View>
-              </View>
+              {/* First currency */}
+              <CurrencyCard
+                currency={isSwapped ? "USD" : "ETH"}
+                amount={isSwapped ? "43,937.4" : "12,695"}
+                balance={isSwapped ? "12,987.21" : "293.018"}
+              />
 
               {/* Swap button */}
               <View style={styles.swapDivider}>
@@ -74,31 +56,12 @@ export default function HomeScreen() {
                 </Pressable>
               </View>
 
-              {/* USD */}
-              <View style={styles.currencySection}>
-                <View style={styles.currencyHeader}>
-                  <View style={styles.dollarIcon}>
-                    <Text style={styles.dollarSymbol}>$</Text>
-                  </View>
-
-                  <Text style={styles.currencyName}>
-                    {isSwapped ? "ETH" : "USD"}
-                  </Text>
-
-                  <Text style={styles.dropdownArrow}>⌄</Text>
-                </View>
-
-                <Text style={styles.amount}>
-                  {isSwapped ? "12,695" : "43,937.4"}
-                </Text>
-
-                <View style={styles.balanceRow}>
-                  <Text style={styles.balanceLabel}>Balance</Text>
-                  <Text style={styles.balanceValue}>
-                    {isSwapped ? "293.018" : "12,987.21"}
-                  </Text>
-                </View>
-              </View>
+              {/* Second currency */}
+              <CurrencyCard
+                currency={isSwapped ? "ETH" : "USD"}
+                amount={isSwapped ? "12,695" : "43,937.4"}
+                balance={isSwapped ? "293.018" : "12,987.21"}
+              />
             </View>
 
             {/* Exchange rate */}
@@ -186,71 +149,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#201D25",
     borderRadius: 24,
     overflow: "visible",
-  },
-  currencySection: {
-    paddingHorizontal: 25,
-    paddingTop: 25,
-    paddingBottom: 26,
-  },
-  currencyHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 9,
-  },
-  ethereumIcon: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: "#0B0B0D",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  ethereumSymbol: {
-    color: "#E7E7E9",
-    fontSize: 28,
-    transform: [{ scaleY: 1.2 }],
-  },
-  dollarIcon: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: "#2B2931",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  dollarSymbol: {
-    color: "#FFFFFF",
-    fontSize: 24,
-  },
-  currencyName: {
-    color: "#F7F5F8",
-    fontSize: 20,
-  },
-  dropdownArrow: {
-    color: "#A8A0B5",
-    fontSize: 18,
-    marginLeft: -3,
-  },
-  amount: {
-    color: "#F7F5F8",
-    fontSize: 54,
-    fontWeight: "300",
-    letterSpacing: -1.5,
-    marginTop: 12,
-    marginBottom: 12,
-  },
-  balanceRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  balanceLabel: {
-    color: "#A6A0B8",
-    fontSize: 15,
-  },
-  balanceValue: {
-    color: "#A6A0B8",
-    fontSize: 15,
   },
   swapDivider: {
     height: 1,
