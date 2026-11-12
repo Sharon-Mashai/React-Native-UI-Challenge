@@ -1,9 +1,10 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { Alert, Pressable, ScrollView, StyleSheet, Text,View,} from "react-native";
+import { Alert, Pressable, ScrollView,StyleSheet, Text,View,} from "react-native";
 import { useState } from "react";
 import ExchangeHeader from "@/components/exchange/ExchangeHeader";
 import CurrencyCard from "@/components/exchange/CurrencyCard";
+import SwapButton from "@/components/exchange/SwapButton";
 
 export default function HomeScreen() {
   const [isSwapped, setIsSwapped] = useState(false);
@@ -34,29 +35,17 @@ export default function HomeScreen() {
 
             {/* Currency cards */}
             <View style={styles.exchangeCard}>
-              {/* First currency */}
               <CurrencyCard
                 currency={isSwapped ? "USD" : "ETH"}
                 amount={isSwapped ? "43,937.4" : "12,695"}
                 balance={isSwapped ? "12,987.21" : "293.018"}
               />
 
-              {/* Swap button */}
-              <View style={styles.swapDivider}>
-                <Pressable
-                  accessibilityRole="button"
-                  accessibilityLabel="Swap currencies"
-                  onPress={() => setIsSwapped((previous) => !previous)}
-                  style={({ pressed }) => [
-                    styles.swapButton,
-                    pressed && styles.buttonPressed,
-                  ]}
-                >
-                  <Text style={styles.swapIcon}>↕</Text>
-                </Pressable>
-              </View>
+              {/* Reusable swap button */}
+              <SwapButton
+                onPress={() => setIsSwapped((previous) => !previous)}
+              />
 
-              {/* Second currency */}
               <CurrencyCard
                 currency={isSwapped ? "ETH" : "USD"}
                 amount={isSwapped ? "12,695" : "43,937.4"}
@@ -149,29 +138,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#201D25",
     borderRadius: 24,
     overflow: "visible",
-  },
-  swapDivider: {
-    height: 1,
-    backgroundColor: "#0C0B0E",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 1,
-  },
-  swapButton: {
-    position: "absolute",
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: "#0B090B",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  swapIcon: {
-    color: "#FFFFFF",
-    fontSize: 23,
-  },
-  buttonPressed: {
-    opacity: 0.65,
   },
   exchangeRate: {
     color: "#F4F0F6",
