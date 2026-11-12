@@ -1,10 +1,11 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { Alert, Pressable, ScrollView,StyleSheet, Text,View,} from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View,} from "react-native";
 import { useState } from "react";
 import ExchangeHeader from "@/components/exchange/ExchangeHeader";
 import CurrencyCard from "@/components/exchange/CurrencyCard";
 import SwapButton from "@/components/exchange/SwapButton";
+import TransactionDetails from "@/components/exchange/TransactionDetails";
 
 export default function HomeScreen() {
   const [isSwapped, setIsSwapped] = useState(false);
@@ -70,26 +71,22 @@ export default function HomeScreen() {
               </Text>
             </Pressable>
 
-            {/* Transaction details */}
-            <View style={styles.transactionDetails}>
-              <DetailRow label="Estimate fee" value="4.28 usd" />
-              <DetailRow label="You will receive" value="43,941.68 USD" />
-              <DetailRow label="Spread" value="0.2%" />
-              <DetailRow label="Gas fee" value="0.0045 ETH" />
-            </View>
+            {/* Reusable transaction details */}
+            <TransactionDetails
+              details={[
+                { label: "Estimate fee", value: "4.28 usd" },
+                {
+                  label: "You will receive",
+                  value: "43,941.68 USD",
+                },
+                { label: "Spread", value: "0.2%" },
+                { label: "Gas fee", value: "0.0045 ETH" },
+              ]}
+            />
           </ScrollView>
         </View>
       </View>
     </SafeAreaView>
-  );
-}
-
-function DetailRow({ label, value }: { label: string; value: string }) {
-  return (
-    <View style={styles.detailRow}>
-      <Text style={styles.detailLabel}>{label}</Text>
-      <Text style={styles.detailValue}>{value}</Text>
-    </View>
   );
 }
 
@@ -161,22 +158,5 @@ const styles = StyleSheet.create({
     color: "#171419",
     fontSize: 16,
     fontWeight: "500",
-  },
-  transactionDetails: {
-    marginTop: 25,
-    gap: 12,
-  },
-  detailRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  detailLabel: {
-    color: "#A6A0B8",
-    fontSize: 13,
-  },
-  detailValue: {
-    color: "#F4F0F6",
-    fontSize: 13,
   },
 });
