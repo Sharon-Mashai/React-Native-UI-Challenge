@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View,} from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions,} from "react-native";
 import { useState } from "react";
 import ExchangeHeader from "@/components/exchange/ExchangeHeader";
 import CurrencyCard from "@/components/exchange/CurrencyCard";
@@ -9,6 +9,9 @@ import TransactionDetails from "@/components/exchange/TransactionDetails";
 
 export default function HomeScreen() {
   const [isSwapped, setIsSwapped] = useState(false);
+  const { width } = useWindowDimensions();
+
+  const horizontalPadding = width < 360 ? 16 : width < 400 ? 20 : 25;
 
   const handleBuy = () => {
     Alert.alert(
@@ -29,7 +32,10 @@ export default function HomeScreen() {
 
           <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.scrollContent}
+            contentContainerStyle={[
+              styles.scrollContent,
+              { paddingHorizontal: horizontalPadding },
+            ]}
           >
             {/* Header */}
             <ExchangeHeader />
@@ -108,7 +114,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingHorizontal: 25,
     paddingBottom: 24,
   },
   glowTop: {
