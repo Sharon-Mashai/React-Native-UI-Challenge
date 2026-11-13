@@ -1,5 +1,7 @@
 
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { ArrowLeft01Icon, Notification03Icon,} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react-native";
 
 export default function ExchangeHeader() {
   return (
@@ -9,7 +11,12 @@ export default function ExchangeHeader() {
         accessibilityLabel="Go back"
         style={styles.headerButton}
       >
-        <Text style={styles.backIcon}>‹</Text>
+        <HugeiconsIcon
+          icon={ArrowLeft01Icon}
+          size={19}
+          color="#C9C0D6"
+          strokeWidth={1.5}
+        />
       </Pressable>
 
       <Text style={styles.headerTitle}>Exchange</Text>
@@ -19,7 +26,13 @@ export default function ExchangeHeader() {
         accessibilityLabel="Notifications"
         style={styles.notificationButton}
       >
-        <Text style={styles.bellIcon}>♟</Text>
+        <HugeiconsIcon
+          icon={Notification03Icon}
+          size={23}
+          color="#A68ABF"
+          strokeWidth={1.5}
+        />
+
         <View style={styles.notificationDot} />
       </Pressable>
     </View>
@@ -29,46 +42,39 @@ export default function ExchangeHeader() {
 const styles = StyleSheet.create({
   header: {
     height: 85,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   headerButton: {
     width: 40,
     height: 40,
-    justifyContent: 'center',
-  },
-  backIcon: {
-    color: '#D8D1DE',
-    fontSize: 35,
-    lineHeight: 40,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingLeft: 5,
   },
   headerTitle: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
-    textAlign: 'center',
-    color: '#F7F5F8',
+    textAlign: "center",
+    color: "#FFFFFF",
     fontSize: 17,
-    fontWeight: '500',
+    fontWeight: "400",
   },
   notificationButton: {
     width: 40,
     height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bellIcon: {
-    color: '#C9A6D5',
-    fontSize: 22,
+    alignItems: "center",
+    justifyContent: "center",
   },
   notificationDot: {
-    position: 'absolute',
-    top: 8,
+    position: "absolute",
+    top: 13,
     right: 7,
-    width: 7,
-    height: 7,
-    borderRadius: 4,
-    backgroundColor: '#B77BE4',
+    width: 5,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: "#E68AB5",
   },
 });
