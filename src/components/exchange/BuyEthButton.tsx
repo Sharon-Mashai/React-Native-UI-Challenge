@@ -1,22 +1,34 @@
-import { LinearGradient } from "expo-linear-gradient";
-import { Pressable, StyleSheet, Text } from "react-native";
+
+import { useState } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function BuyEthButton() {
+  const [pressed, setPressed] = useState(false);
+
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel="Buy ETH"
-      style={styles.button}
+      onPressIn={() => setPressed(true)}
+      onPressOut={() => setPressed(false)}
       onPress={() => {}}
+      style={styles.button}
     >
-      <LinearGradient
-        colors={["#A66BCE", "#7445A8"]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        style={styles.gradient}
+      <View
+        style={[
+          styles.buttonContent,
+          pressed ? styles.pressedBackground : styles.normalBackground,
+        ]}
       >
-        <Text style={styles.buttonText}>Buy ETH</Text>
-      </LinearGradient>
+        <Text
+          style={[
+            styles.buttonText,
+            pressed ? styles.pressedText : styles.normalText,
+          ]}
+        >
+          Buy ETH
+        </Text>
+      </View>
     </Pressable>
   );
 }
@@ -29,15 +41,26 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     marginBottom: 28,
   },
-  gradient: {
+  buttonContent: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
+  normalBackground: {
+    backgroundColor: "#FFFFFF",
+  },
+  pressedBackground: {
+    backgroundColor: "#000000",
+  },
   buttonText: {
-    color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "700",
     letterSpacing: 0.3,
+  },
+  normalText: {
+    color: "#000000",
+  },
+  pressedText: {
+    color: "#FFFFFF",
   },
 });
