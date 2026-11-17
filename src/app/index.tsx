@@ -1,15 +1,22 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { ScrollView, StyleSheet, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from "react-native";
 
 import ExchangeHeader from "@/components/exchange/ExchangeHeader";
-import EthCurrencyCard from "@/components/exchange/EthCurrencyCard";
-import UsdCurrencyCard from "@/components/exchange/UsdCurrencyCard";
-import CurrencySwapButton from "@/components/exchange/CurrencySwapButton";
+import ExchangeCurrencyPanel from "@/components/exchange/ExchangeCurrencyPanel";
 import ExchangeRate from "@/components/exchange/ExchangeRate";
 import BuyEthButton from "@/components/exchange/BuyEthButton";
 import TransactionDetails from "@/components/exchange/TransactionDetails";
 
 export default function HomeScreen() {
+  const { width } = useWindowDimensions();
+
+  const horizontalPadding = width < 350 ? 16 : width < 400 ? 20 : 24;
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -41,14 +48,10 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.screen}>
+        <View style={[styles.screen, { paddingHorizontal: horizontalPadding }]}>
           <ExchangeHeader />
 
-          <View style={styles.currencyCards}>
-            <EthCurrencyCard />
-            <CurrencySwapButton />
-            <UsdCurrencyCard />
-          </View>
+          <ExchangeCurrencyPanel />
 
           <ExchangeRate />
 
@@ -94,11 +97,7 @@ const styles = StyleSheet.create({
     width: "100%",
     maxWidth: 480,
     flex: 1,
-    paddingHorizontal: 24,
     paddingTop: 22,
     paddingBottom: 40,
-  },
-  currencyCards: {
-    gap: 0,
   },
 });
