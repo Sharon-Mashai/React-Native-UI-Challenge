@@ -1,6 +1,8 @@
 import { useState, type ComponentProps } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { HugeiconsIcon } from "@hugeicons/react-native";
+import { Dollar01Icon } from "@hugeicons/core-free-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type IconName = ComponentProps<typeof MaterialCommunityIcons>["name"];
@@ -40,6 +42,22 @@ const currencies: Currency[] = [
     iconBackground: "grey",
   },
 ];
+
+function CurrencyIcon({
+  currency,
+  size,
+}: {
+  currency: Currency;
+  size: number;
+}) {
+  if (currency.symbol === "USD") {
+    return <HugeiconsIcon icon={Dollar01Icon} size={size} color="#FFFFFF" />;
+  }
+
+  return (
+    <MaterialCommunityIcons name={currency.icon} size={size} color="#FFFFFF" />
+  );
+}
 
 export default function ExchangeCurrencyPanel() {
   const [topCurrency, setTopCurrency] = useState(currencies[0]);
@@ -86,11 +104,7 @@ export default function ExchangeCurrencyPanel() {
                 : styles.dollarIcon,
             ]}
           >
-            <MaterialCommunityIcons
-              name={currency.icon}
-              size={25}
-              color="#FFFFFF"
-            />
+            <CurrencyIcon currency={currency} size={25} />
           </View>
 
           <Text style={styles.currencyName}>{currency.symbol}</Text>
@@ -122,11 +136,7 @@ export default function ExchangeCurrencyPanel() {
                       : styles.dollarIcon,
                   ]}
                 >
-                  <MaterialCommunityIcons
-                    name={item.icon}
-                    size={19}
-                    color="#FFFFFF"
-                  />
+                  <CurrencyIcon currency={item} size={19} />
                 </View>
 
                 <View style={styles.dropdownText}>
