@@ -4,7 +4,7 @@ A responsive cryptocurrency exchange interface built with React Native and Expo.
 
 ## Preview
 
-![Crypto Exchange UI Preview](assets/Crypto-UI-Preview.png)
+![Crypto Exchange UI](assets/Crypto-UI-Preview.png)
 
 ## Features
 
@@ -74,6 +74,12 @@ After starting Expo, choose the platform you want to use:
 - Press `w` to open the web version.
 - Scan the QR code using Expo Go to run it on a compatible mobile device.
 - Use an Android emulator if one is configured.
+
+## Android APK Download
+
+The Android application build is available on Google Drive:
+
+[Download Crypto Exchange UI Challenge APK](https://drive.google.com/drive/folders/10bg2zpd-8ksvk0tKIDDmk8ucCQevh06h?usp=sharing)
 
 ## TypeScript Check
 
