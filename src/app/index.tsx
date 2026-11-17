@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   ScrollView,
   StyleSheet,
   View,
-  useWindowDimensions,
+  type LayoutChangeEvent,
 } from "react-native";
 
 import ExchangeHeader from "@/components/exchange/ExchangeHeader";
@@ -14,16 +14,16 @@ import BuyEthButton from "@/components/exchange/BuyEthButton";
 import TransactionDetails from "@/components/exchange/TransactionDetails";
 
 export default function HomeScreen() {
-  const { width } = useWindowDimensions();
-
   // Keep the initial server and browser renders identical.
   const [horizontalPadding, setHorizontalPadding] = useState(24);
 
-  // Apply the actual screen width after the component mounts.
-  useEffect(() => {
+  // Update responsive padding after the screen has been laid out.
+  const handleLayout = (event: LayoutChangeEvent) => {
+    const width = event.nativeEvent.layout.width;
     const padding = width < 350 ? 16 : width < 400 ? 20 : 24;
+
     setHorizontalPadding(padding);
-  }, [width]);
+  };
 
   return (
     <View style={styles.container}>
@@ -56,15 +56,14 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={[styles.screen, { paddingHorizontal: horizontalPadding }]}>
+        <View
+          onLayout={handleLayout}
+          style={[styles.screen, { paddingHorizontal: horizontalPadding }]}
+        >
           <ExchangeHeader />
-
           <ExchangeCurrencyPanel />
-
           <ExchangeRate />
-
           <BuyEthButton />
-
           <TransactionDetails />
         </View>
       </ScrollView>
