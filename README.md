@@ -2,6 +2,10 @@
 
 A responsive cryptocurrency exchange interface built with React Native and Expo. The application recreates an exchange screen with a dark purple theme, currency selection, interactive controls and transaction information.
 
+## Preview
+
+![Crypto Exchange UI Preview](assets/Crypto-UI-Preview.png)
+
 ## Features
 
 - **Exchange interface:** Displays ETH and USD currency panels.
