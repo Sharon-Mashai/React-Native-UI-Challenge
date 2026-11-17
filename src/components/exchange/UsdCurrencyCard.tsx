@@ -1,4 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { HugeiconsIcon } from "@hugeicons/react-native";
+import { Dollar01Icon } from "@hugeicons/core-free-icons";
 
 export default function UsdCurrencyCard() {
   return (
@@ -6,11 +8,11 @@ export default function UsdCurrencyCard() {
       <View style={styles.topRow}>
         <View style={styles.currencyInfo}>
           <View style={styles.iconCircle}>
-            <Text style={styles.dollarSymbol}>$</Text>
+            <HugeiconsIcon icon={Dollar01Icon} size={24} color="#BBA8D0" />
           </View>
 
           <View>
-           <Text style={styles.currencyName}>USD</Text>
+            <Text style={styles.currencyName}>USD</Text>
           </View>
         </View>
 
@@ -60,11 +62,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#29233A",
-  },
-  dollarSymbol: {
-    color: "#BBA8D0",
-    fontSize: 23,
-    fontWeight: "600",
   },
   currencyName: {
     color: "#FFFFFF",
