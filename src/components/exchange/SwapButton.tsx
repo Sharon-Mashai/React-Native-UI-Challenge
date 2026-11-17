@@ -16,7 +16,7 @@ export default function SwapButton({ onPress }: SwapButtonProps) {
           pressed && styles.buttonPressed,
         ]}
       >
-        <Text style={styles.swapIcon}>↕</Text>
+        <Text style={styles.swapIcon}>⇅</Text>
       </Pressable>
     </View>
   );
