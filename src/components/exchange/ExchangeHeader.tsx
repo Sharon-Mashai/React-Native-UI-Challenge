@@ -2,23 +2,25 @@
 
 export default function ExchangeHeader() {
   return (
-    <View style={styles.header}>
+    <View style={styles.container}>
       <Pressable
         accessibilityRole="button"
         accessibilityLabel="Go back"
-        style={styles.headerButton}
+        style={styles.iconButton}
+        onPress={() => {}}
       >
-        <Text style={styles.backIcon}>‹</Text>
+        <Text style={styles.backArrow}>‹</Text>
       </Pressable>
 
-      <Text style={styles.headerTitle}>Exchange</Text>
+      <Text style={styles.title}>Exchange</Text>
 
       <Pressable
         accessibilityRole="button"
         accessibilityLabel="Notifications"
-        style={styles.notificationButton}
+        style={styles.iconButton}
+        onPress={() => {}}
       >
-        <Text style={styles.notificationIcon}>♧</Text>
+        <Text style={styles.bell}>♧</Text>
         <View style={styles.notificationDot} />
       </Pressable>
     </View>
@@ -26,51 +28,46 @@ export default function ExchangeHeader() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    height: 85,
+  container: {
+    height: 58,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginBottom: 22,
   },
-  headerButton: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "flex-start",
-    paddingLeft: 5,
-  },
-  backIcon: {
-    color: "#C9C0D6",
-    fontSize: 38,
-    lineHeight: 40,
-    fontWeight: "300",
-  },
-  headerTitle: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    color: "#FFFFFF",
-    fontSize: 17,
-    fontWeight: "400",
-  },
-  notificationButton: {
-    width: 40,
-    height: 40,
+  iconButton: {
+    width: 44,
+    height: 44,
     alignItems: "center",
     justifyContent: "center",
+    position: "relative",
   },
-  notificationIcon: {
-    color: "#A68ABF",
+  backArrow: {
+    color: "#E5DCEC",
+    fontSize: 38,
+    fontWeight: "300",
+    lineHeight: 42,
+  },
+  title: {
+    position: "absolute",
+    left: 44,
+    right: 44,
+    textAlign: "center",
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "500",
+  },
+  bell: {
+    color: "#B99ACF",
     fontSize: 25,
   },
   notificationDot: {
     position: "absolute",
     top: 9,
-    right: 7,
-    width: 5,
-    height: 5,
+    right: 10,
+    width: 6,
+    height: 6,
     borderRadius: 3,
-    backgroundColor: "#E68AB5",
+    backgroundColor: "#E58CB9",
   },
 });
