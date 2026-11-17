@@ -1,9 +1,29 @@
-
+import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+const currencies = {
+  eth: {
+    name: "ETH",
+    amount: "12,695",
+    balance: "293.0187",
+    icon: "ethereum" as const,
+  },
+  usd: {
+    name: "USD",
+    amount: "43,937.4",
+    balance: "12,987.21",
+    icon: "currency-usd" as const,
+  },
+};
+
 export default function ExchangeCurrencyPanel() {
+  const [isReversed, setIsReversed] = useState(false);
+
+  const topCurrency = isReversed ? currencies.usd : currencies.eth;
+  const bottomCurrency = isReversed ? currencies.eth : currencies.usd;
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -15,37 +35,48 @@ export default function ExchangeCurrencyPanel() {
         pointerEvents="none"
       />
 
-      {/* ETH section */}
+      {/* Top currency */}
       <View style={styles.currencySection}>
         <View style={styles.currencyInfo}>
-          <View style={styles.ethereumIcon}>
+          <View
+            style={
+              topCurrency.name === "ETH"
+                ? styles.ethereumIcon
+                : styles.dollarIcon
+            }
+          >
             <MaterialCommunityIcons
-              name="ethereum"
+              name={topCurrency.icon}
               size={27}
               color="#FFFFFF"
             />
           </View>
 
-          <Text style={styles.currencyName}>ETH</Text>
-          <Text style={styles.chevron}>⌄</Text>
+          <Text style={styles.currencyName}>{topCurrency.name}</Text>
+
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={20}
+            color="#D2C8D9"
+          />
         </View>
 
-        <Text style={styles.amount}>12,695</Text>
+        <Text style={styles.amount}>{topCurrency.amount}</Text>
 
         <View style={styles.balanceRow}>
           <Text style={styles.balanceLabel}>Balance</Text>
-          <Text style={styles.balanceValue}>293.0187</Text>
+          <Text style={styles.balanceValue}>{topCurrency.balance}</Text>
         </View>
       </View>
 
       <View style={styles.divider} />
 
-      {/* Swap button */}
+      {/* Interactive swap button */}
       <Pressable
         accessibilityRole="button"
         accessibilityLabel="Swap currencies"
         style={styles.swapButton}
-        onPress={() => {}}
+        onPress={() => setIsReversed((previous) => !previous)}
       >
         <MaterialCommunityIcons
           name="swap-vertical"
@@ -54,26 +85,37 @@ export default function ExchangeCurrencyPanel() {
         />
       </Pressable>
 
-      {/* USD section */}
+      {/* Bottom currency */}
       <View style={styles.currencySection}>
         <View style={styles.currencyInfo}>
-          <View style={styles.dollarIcon}>
+          <View
+            style={
+              bottomCurrency.name === "ETH"
+                ? styles.ethereumIcon
+                : styles.dollarIcon
+            }
+          >
             <MaterialCommunityIcons
-              name="currency-usd"
-              size={25}
+              name={bottomCurrency.icon}
+              size={27}
               color="#FFFFFF"
             />
           </View>
 
-          <Text style={styles.currencyName}>USD</Text>
-          <Text style={styles.chevron}>⌄</Text>
+          <Text style={styles.currencyName}>{bottomCurrency.name}</Text>
+
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={20}
+            color="#D2C8D9"
+          />
         </View>
 
-        <Text style={styles.amount}>43,937.4</Text>
+        <Text style={styles.amount}>{bottomCurrency.amount}</Text>
 
         <View style={styles.balanceRow}>
           <Text style={styles.balanceLabel}>Balance</Text>
-          <Text style={styles.balanceValue}>12,987.21</Text>
+          <Text style={styles.balanceValue}>{bottomCurrency.balance}</Text>
         </View>
       </View>
     </View>
@@ -108,7 +150,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 21,
-    backgroundColor: "#101014",
+    backgroundColor: "#000000",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -116,7 +158,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 21,
-    backgroundColor: "rgba(255, 255, 255, 0.12)",
+    backgroundColor: "rgba(255, 255, 255, 0.18)",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -124,11 +166,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 22,
     fontWeight: "400",
-  },
-  chevron: {
-    color: "#D2C8D9",
-    fontSize: 18,
-    marginLeft: -4,
   },
   amount: {
     color: "#FFFFFF",
