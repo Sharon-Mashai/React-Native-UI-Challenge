@@ -1,4 +1,3 @@
-
 import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 
 type CurrencyCardProps = {
@@ -21,9 +20,7 @@ export default function CurrencyCard({
   return (
     <View style={styles.currencySection}>
       <View style={styles.currencyHeader}>
-        <View
-          style={isEthereum ? styles.ethereumIcon : styles.dollarIcon}
-        >
+        <View style={isEthereum ? styles.ethereumIcon : styles.dollarIcon}>
           <Text
             style={isEthereum ? styles.ethereumSymbol : styles.dollarSymbol}
           >
