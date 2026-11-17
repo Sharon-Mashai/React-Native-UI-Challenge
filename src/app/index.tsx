@@ -1,11 +1,14 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView, StyleSheet, View } from "react-native";
+
 import ExchangeHeader from "@/components/exchange/ExchangeHeader";
+import EthCurrencyCard from "@/components/exchange/EthCurrencyCard";
+import UsdCurrencyCard from "@/components/exchange/UsdCurrencyCard";
+import CurrencySwapButton from "@/components/exchange/CurrencySwapButton";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      {/* Purple ambient lighting */}
       <LinearGradient
         colors={[
           "rgba(105, 45, 155, 0.30)",
@@ -37,6 +40,12 @@ export default function HomeScreen() {
       >
         <View style={styles.screen}>
           <ExchangeHeader />
+
+          <View style={styles.currencyCards}>
+            <EthCurrencyCard />
+            <CurrencySwapButton />
+            <UsdCurrencyCard />
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -79,5 +88,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 22,
     paddingBottom: 40,
+  },
+  currencyCards: {
+    gap: 0,
   },
 });
