@@ -1,7 +1,4 @@
-
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import { ArrowLeft01Icon, Notification03Icon,} from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react-native";
+﻿import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function ExchangeHeader() {
   return (
@@ -11,12 +8,7 @@ export default function ExchangeHeader() {
         accessibilityLabel="Go back"
         style={styles.headerButton}
       >
-        <HugeiconsIcon
-          icon={ArrowLeft01Icon}
-          size={19}
-          color="#C9C0D6"
-          strokeWidth={1.5}
-        />
+        <Text style={styles.backIcon}>‹</Text>
       </Pressable>
 
       <Text style={styles.headerTitle}>Exchange</Text>
@@ -26,13 +18,7 @@ export default function ExchangeHeader() {
         accessibilityLabel="Notifications"
         style={styles.notificationButton}
       >
-        <HugeiconsIcon
-          icon={Notification03Icon}
-          size={23}
-          color="#A68ABF"
-          strokeWidth={1.5}
-        />
-
+        <Text style={styles.notificationIcon}>♧</Text>
         <View style={styles.notificationDot} />
       </Pressable>
     </View>
@@ -53,6 +39,12 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingLeft: 5,
   },
+  backIcon: {
+    color: "#C9C0D6",
+    fontSize: 38,
+    lineHeight: 40,
+    fontWeight: "300",
+  },
   headerTitle: {
     position: "absolute",
     left: 0,
@@ -68,9 +60,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  notificationIcon: {
+    color: "#A68ABF",
+    fontSize: 25,
+  },
   notificationDot: {
     position: "absolute",
-    top: 13,
+    top: 9,
     right: 7,
     width: 5,
     height: 5,
