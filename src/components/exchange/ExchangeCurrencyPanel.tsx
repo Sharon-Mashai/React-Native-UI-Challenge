@@ -1,19 +1,33 @@
+
+import { LinearGradient } from "expo-linear-gradient";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function ExchangeCurrencyPanel() {
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={["#55545C", "#302337", "#24132F"]}
+        locations={[0, 0.52, 1]}
+        start={{ x: 0, y: 0.5 }}
+        end={{ x: 1, y: 0.5 }}
+        style={styles.backgroundGradient}
+        pointerEvents="none"
+      />
+
       {/* ETH section */}
       <View style={styles.currencySection}>
-        <View style={styles.topRow}>
-          <View style={styles.currencyInfo}>
-            <View style={styles.ethereumIcon}>
-              <Text style={styles.ethereumSymbol}>♦</Text>
-            </View>
-
-            <Text style={styles.currencyName}>ETH</Text>
-            <Text style={styles.chevron}>⌄</Text>
+        <View style={styles.currencyInfo}>
+          <View style={styles.ethereumIcon}>
+            <MaterialCommunityIcons
+              name="ethereum"
+              size={27}
+              color="#FFFFFF"
+            />
           </View>
+
+          <Text style={styles.currencyName}>ETH</Text>
+          <Text style={styles.chevron}>⌄</Text>
         </View>
 
         <Text style={styles.amount}>12,695</Text>
@@ -24,7 +38,6 @@ export default function ExchangeCurrencyPanel() {
         </View>
       </View>
 
-      {/* Divider */}
       <View style={styles.divider} />
 
       {/* Swap button */}
@@ -34,20 +47,26 @@ export default function ExchangeCurrencyPanel() {
         style={styles.swapButton}
         onPress={() => {}}
       >
-        <Text style={styles.swapIcon}>↕</Text>
+        <MaterialCommunityIcons
+          name="swap-vertical"
+          size={25}
+          color="#FFFFFF"
+        />
       </Pressable>
 
       {/* USD section */}
       <View style={styles.currencySection}>
-        <View style={styles.topRow}>
-          <View style={styles.currencyInfo}>
-            <View style={styles.dollarIcon}>
-              <Text style={styles.dollarSymbol}>$</Text>
-            </View>
-
-            <Text style={styles.currencyName}>USD</Text>
-            <Text style={styles.chevron}>⌄</Text>
+        <View style={styles.currencyInfo}>
+          <View style={styles.dollarIcon}>
+            <MaterialCommunityIcons
+              name="currency-usd"
+              size={25}
+              color="#FFFFFF"
+            />
           </View>
+
+          <Text style={styles.currencyName}>USD</Text>
+          <Text style={styles.chevron}>⌄</Text>
         </View>
 
         <Text style={styles.amount}>43,937.4</Text>
@@ -64,10 +83,14 @@ export default function ExchangeCurrencyPanel() {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    backgroundColor: "#211D26",
     borderRadius: 22,
-    overflow: "visible",
     position: "relative",
+    overflow: "visible",
+    backgroundColor: "#55545C",
+  },
+  backgroundGradient: {
+    ...StyleSheet.absoluteFill,
+    borderRadius: 22,
   },
   currencySection: {
     height: 211,
@@ -75,10 +98,6 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     paddingBottom: 24,
     justifyContent: "space-between",
-  },
-  topRow: {
-    flexDirection: "row",
-    alignItems: "center",
   },
   currencyInfo: {
     flexDirection: "row",
@@ -93,22 +112,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  ethereumSymbol: {
-    color: "#FFFFFF",
-    fontSize: 27,
-  },
   dollarIcon: {
     width: 42,
     height: 42,
     borderRadius: 21,
-    backgroundColor: "#302D36",
+    backgroundColor: "rgba(255, 255, 255, 0.12)",
     alignItems: "center",
     justifyContent: "center",
-  },
-  dollarSymbol: {
-    color: "#FFFFFF",
-    fontSize: 25,
-    fontWeight: "500",
   },
   currencyName: {
     color: "#FFFFFF",
@@ -116,7 +126,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
   },
   chevron: {
-    color: "#AAA2B3",
+    color: "#D2C8D9",
     fontSize: 18,
     marginLeft: -4,
   },
@@ -132,16 +142,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   balanceLabel: {
-    color: "#A9A0B7",
+    color: "#D0C9D5",
     fontSize: 15,
   },
   balanceValue: {
-    color: "#A9A0B7",
+    color: "#E0D5E8",
     fontSize: 15,
   },
   divider: {
     height: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.65)",
+    backgroundColor: "rgba(0, 0, 0, 0.45)",
   },
   swapButton: {
     position: "absolute",
@@ -155,10 +165,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     zIndex: 2,
     elevation: 5,
-  },
-  swapIcon: {
-    color: "#FFFFFF",
-    fontSize: 23,
-    fontWeight: "400",
   },
 });
