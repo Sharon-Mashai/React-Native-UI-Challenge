@@ -1,22 +1,13 @@
-
-import { DarkTheme, Stack, ThemeProvider } from 'expo-router';
-
-import * as SplashScreen from 'expo-splash-screen';
-
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-
-SplashScreen.preventAutoHideAsync();
+import { DarkTheme, Stack, ThemeProvider } from "expo-router";
 
 export default function RootLayout() {
   return (
     <ThemeProvider value={DarkTheme}>
-      <AnimatedSplashOverlay />
-
       <Stack
         screenOptions={{
           headerShown: false,
           contentStyle: {
-            backgroundColor: '#0B0B10',
+            backgroundColor: "#0B0B10",
           },
         }}
       />
