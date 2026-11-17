@@ -1,25 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
 
 const transactionItems = [
-  { label: "Estimated fee", value: "$2.50" },
-  { label: "Amount received", value: "0.025 ETH" },
-  { label: "Spread", value: "0.15%" },
-  { label: "Gas fee", value: "$1.20" },
+  { label: "Estimated fee", value: "4.28 USD" },
+  { label: "You will receive", value: "43,941.68 USD" },
+  { label: "Spread", value: "0.2%" },
+  { label: "Gas fee", value: "0.0045 ETH" },
 ];
 
 export default function TransactionDetails() {
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Transaction details</Text>
-
-      <View style={styles.detailsList}>
-        {transactionItems.map((item) => (
-          <View key={item.label} style={styles.detailRow}>
-            <Text style={styles.label}>{item.label}</Text>
-            <Text style={styles.value}>{item.value}</Text>
-          </View>
-        ))}
-      </View>
+      {transactionItems.map((item) => (
+        <View key={item.label} style={styles.detailRow}>
+          <Text style={styles.label}>{item.label}</Text>
+          <Text style={styles.value}>{item.value}</Text>
+        </View>
+      ))}
     </View>
   );
 }
@@ -27,33 +23,25 @@ export default function TransactionDetails() {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    padding: 20,
-    borderRadius: 20,
-    backgroundColor: "rgba(29, 25, 38, 0.72)",
-    borderWidth: 1,
-    borderColor: "rgba(164, 125, 190, 0.14)",
-  },
-  heading: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "600",
-    marginBottom: 20,
-  },
-  detailsList: {
     gap: 18,
+    paddingHorizontal: 4,
   },
   detailRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    gap: 12,
   },
   label: {
     color: "#92899E",
     fontSize: 13,
+    flex: 1,
   },
   value: {
     color: "#E7D9F3",
     fontSize: 13,
     fontWeight: "600",
+    textAlign: "right",
+    flexShrink: 0,
   },
 });
