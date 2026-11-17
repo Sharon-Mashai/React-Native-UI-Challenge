@@ -1,5 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
+import ExchangeHeader from "@/components/exchange/ExchangeHeader";
 
 export default function HomeScreen() {
   return (
@@ -35,7 +36,7 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.screen}>
-          <Text style={styles.title}>Exchange</Text>
+          <ExchangeHeader />
         </View>
       </ScrollView>
     </View>
@@ -78,10 +79,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 22,
     paddingBottom: 40,
-  },
-  title: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    fontWeight: "600",
   },
 });
