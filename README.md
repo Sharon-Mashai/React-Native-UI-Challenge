@@ -1,56 +1,84 @@
-# Welcome to your Expo app 👋
+# Crypto Exchange UI Challenge
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A responsive cryptocurrency exchange interface built with React Native and Expo. The application recreates an exchange screen with a dark purple theme, currency selection, interactive controls and transaction information.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Exchange interface:** Displays ETH and USD currency panels.
+- **Currency selection:** Choose between ETH, USD and BTC.
+- **Currency swapping:** Switch the selected currencies.
+- **Interactive dropdowns:** Open and close currency selection menus.
+- **Buy ETH button:** Includes hover and press visual feedback.
+- **Notifications:** Interactive notification bell with a sample notification panel.
+- **Exchange rate:** Displays the exchange rate between ETH and USD.
+- **Transaction details:** Shows estimated fees, amount to receive, spread and gas fee.
+- **Responsive layout:** Adapts to mobile, tablet and desktop screen sizes.
+- **Dark appearance:** Uses a dark background with purple gradient styling.
+
+## Technologies Used
+
+- React Native
+- Expo
+- TypeScript
+- React
+- React Native SVG
+- Expo Linear Gradient
+- React Native Vector Icons
+- Hugeicons
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js
+- npm
+- Git
+- Expo-compatible development environment
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Sharon-Mashai/React-Native-UI-Challenge.git
+   ```
+
+2. Navigate into the project directory:
+
+   ```bash
+   cd React-Native-UI-Challenge
+   ```
+
+3. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+4. Start the Expo development server:
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+### Running the Application
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+After starting Expo, choose the platform you want to use:
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Press `w` to open the web version.
+- Scan the QR code using Expo Go to run it on a compatible mobile device.
+- Use an Android emulator if one is configured.
 
-## Get a fresh project
+## TypeScript Check
 
-When you're ready, run:
+To check the project for TypeScript errors, run:
 
 ```bash
-npm run reset-project
+npx tsc --noEmit
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Author
 
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Developed as part of a React Native UI Challenge.
