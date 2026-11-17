@@ -1,28 +1,153 @@
-import { useState } from "react";
+import { useState, type ComponentProps } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-const currencies = {
-  eth: {
-    name: "ETH",
-    amount: "12,695",
-    balance: "293.0187",
-    icon: "ethereum" as const,
-  },
-  usd: {
-    name: "USD",
-    amount: "43,937.4",
-    balance: "12,987.21",
-    icon: "currency-usd" as const,
-  },
+type IconName = ComponentProps<typeof MaterialCommunityIcons>["name"];
+
+type Currency = {
+  symbol: string;
+  name: string;
+  amount: string;
+  balance: string;
+  icon: IconName;
+  iconBackground: "black" | "grey";
 };
 
-export default function ExchangeCurrencyPanel() {
-  const [isReversed, setIsReversed] = useState(false);
+const currencies: Currency[] = [
+  {
+    symbol: "ETH",
+    name: "Ethereum",
+    amount: "12,695",
+    balance: "293.0187",
+    icon: "ethereum",
+    iconBackground: "black",
+  },
+  {
+    symbol: "USD",
+    name: "US Dollar",
+    amount: "43,937.4",
+    balance: "12,987.21",
+    icon: "currency-usd",
+    iconBackground: "grey",
+  },
+  {
+    symbol: "BTC",
+    name: "Bitcoin",
+    amount: "67,450",
+    balance: "0.8542",
+    icon: "bitcoin",
+    iconBackground: "grey",
+  },
+];
 
-  const topCurrency = isReversed ? currencies.usd : currencies.eth;
-  const bottomCurrency = isReversed ? currencies.eth : currencies.usd;
+export default function ExchangeCurrencyPanel() {
+  const [topCurrency, setTopCurrency] = useState(currencies[0]);
+  const [bottomCurrency, setBottomCurrency] = useState(currencies[1]);
+  const [openDropdown, setOpenDropdown] = useState<"top" | "bottom" | null>(
+    null,
+  );
+
+  const selectCurrency = (currency: Currency, position: "top" | "bottom") => {
+    if (position === "top") {
+      setTopCurrency(currency);
+    } else {
+      setBottomCurrency(currency);
+    }
+
+    setOpenDropdown(null);
+  };
+
+  const swapCurrencies = () => {
+    setTopCurrency(bottomCurrency);
+    setBottomCurrency(topCurrency);
+    setOpenDropdown(null);
+  };
+
+  const renderCurrencySelector = (
+    currency: Currency,
+    position: "top" | "bottom",
+  ) => {
+    const isOpen = openDropdown === position;
+
+    return (
+      <View style={styles.selectorContainer}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={`Select ${currency.symbol} currency`}
+          style={styles.currencySelector}
+          onPress={() => setOpenDropdown(isOpen ? null : position)}
+        >
+          <View
+            style={[
+              styles.currencyIcon,
+              currency.iconBackground === "black"
+                ? styles.ethereumIcon
+                : styles.dollarIcon,
+            ]}
+          >
+            <MaterialCommunityIcons
+              name={currency.icon}
+              size={25}
+              color="#FFFFFF"
+            />
+          </View>
+
+          <Text style={styles.currencyName}>{currency.symbol}</Text>
+
+          <MaterialCommunityIcons
+            name={isOpen ? "chevron-up" : "chevron-down"}
+            size={22}
+            color="#D2C8D9"
+          />
+        </Pressable>
+
+        {isOpen && (
+          <View style={styles.dropdown}>
+            {currencies.map((item) => (
+              <Pressable
+                key={item.symbol}
+                style={[
+                  styles.dropdownItem,
+                  item.symbol === currency.symbol &&
+                    styles.selectedDropdownItem,
+                ]}
+                onPress={() => selectCurrency(item, position)}
+              >
+                <View
+                  style={[
+                    styles.dropdownIcon,
+                    item.iconBackground === "black"
+                      ? styles.ethereumIcon
+                      : styles.dollarIcon,
+                  ]}
+                >
+                  <MaterialCommunityIcons
+                    name={item.icon}
+                    size={19}
+                    color="#FFFFFF"
+                  />
+                </View>
+
+                <View style={styles.dropdownText}>
+                  <Text style={styles.dropdownSymbol}>{item.symbol}</Text>
+                  <Text style={styles.dropdownName}>{item.name}</Text>
+                </View>
+
+                {item.symbol === currency.symbol && (
+                  <MaterialCommunityIcons
+                    name="check"
+                    size={18}
+                    color="#C9A5E8"
+                  />
+                )}
+              </Pressable>
+            ))}
+          </View>
+        )}
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -35,30 +160,14 @@ export default function ExchangeCurrencyPanel() {
         pointerEvents="none"
       />
 
-      {/* Top currency */}
-      <View style={styles.currencySection}>
+      <View
+        style={[
+          styles.currencySection,
+          openDropdown === "top" && styles.activeSection,
+        ]}
+      >
         <View style={styles.currencyInfo}>
-          <View
-            style={
-              topCurrency.name === "ETH"
-                ? styles.ethereumIcon
-                : styles.dollarIcon
-            }
-          >
-            <MaterialCommunityIcons
-              name={topCurrency.icon}
-              size={27}
-              color="#FFFFFF"
-            />
-          </View>
-
-          <Text style={styles.currencyName}>{topCurrency.name}</Text>
-
-          <MaterialCommunityIcons
-            name="chevron-down"
-            size={20}
-            color="#D2C8D9"
-          />
+          {renderCurrencySelector(topCurrency, "top")}
         </View>
 
         <Text style={styles.amount}>{topCurrency.amount}</Text>
@@ -71,12 +180,11 @@ export default function ExchangeCurrencyPanel() {
 
       <View style={styles.divider} />
 
-      {/* Interactive swap button */}
       <Pressable
         accessibilityRole="button"
         accessibilityLabel="Swap currencies"
         style={styles.swapButton}
-        onPress={() => setIsReversed((previous) => !previous)}
+        onPress={swapCurrencies}
       >
         <MaterialCommunityIcons
           name="swap-vertical"
@@ -85,30 +193,14 @@ export default function ExchangeCurrencyPanel() {
         />
       </Pressable>
 
-      {/* Bottom currency */}
-      <View style={styles.currencySection}>
+      <View
+        style={[
+          styles.currencySection,
+          openDropdown === "bottom" && styles.activeSection,
+        ]}
+      >
         <View style={styles.currencyInfo}>
-          <View
-            style={
-              bottomCurrency.name === "ETH"
-                ? styles.ethereumIcon
-                : styles.dollarIcon
-            }
-          >
-            <MaterialCommunityIcons
-              name={bottomCurrency.icon}
-              size={27}
-              color="#FFFFFF"
-            />
-          </View>
-
-          <Text style={styles.currencyName}>{bottomCurrency.name}</Text>
-
-          <MaterialCommunityIcons
-            name="chevron-down"
-            size={20}
-            color="#D2C8D9"
-          />
+          {renderCurrencySelector(bottomCurrency, "bottom")}
         </View>
 
         <Text style={styles.amount}>{bottomCurrency.amount}</Text>
@@ -141,31 +233,89 @@ const styles = StyleSheet.create({
     paddingBottom: 24,
     justifyContent: "space-between",
   },
+  activeSection: {
+    zIndex: 50,
+    elevation: 50,
+  },
   currencyInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  selectorContainer: {
+    position: "relative",
+    zIndex: 100,
+    elevation: 20,
+  },
+  currencySelector: {
     flexDirection: "row",
     alignItems: "center",
     gap: 9,
   },
-  ethereumIcon: {
+  currencyIcon: {
     width: 42,
     height: 42,
     borderRadius: 21,
-    backgroundColor: "#000000",
     alignItems: "center",
     justifyContent: "center",
   },
+  ethereumIcon: {
+    backgroundColor: "#000000",
+  },
   dollarIcon: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
     backgroundColor: "rgba(255, 255, 255, 0.18)",
-    alignItems: "center",
-    justifyContent: "center",
   },
   currencyName: {
     color: "#FFFFFF",
     fontSize: 22,
     fontWeight: "400",
+  },
+  dropdown: {
+    position: "absolute",
+    top: 50,
+    left: 0,
+    width: 225,
+    maxHeight: 300,
+    backgroundColor: "#17141E",
+    borderRadius: 14,
+    paddingVertical: 7,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.2)",
+    zIndex: 100,
+    elevation: 25,
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.55,
+    shadowRadius: 12,
+  },
+  dropdownItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 11,
+    paddingVertical: 10,
+    gap: 10,
+  },
+  selectedDropdownItem: {
+    backgroundColor: "rgba(164, 117, 195, 0.18)",
+  },
+  dropdownIcon: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  dropdownText: {
+    flex: 1,
+    gap: 2,
+  },
+  dropdownSymbol: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  dropdownName: {
+    color: "#AAA4B2",
+    fontSize: 11,
   },
   amount: {
     color: "#FFFFFF",
@@ -200,7 +350,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#09090C",
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 2,
-    elevation: 5,
+    zIndex: 10,
+    elevation: 10,
   },
 });
