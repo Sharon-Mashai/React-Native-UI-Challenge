@@ -5,6 +5,7 @@ import ExchangeHeader from "@/components/exchange/ExchangeHeader";
 import EthCurrencyCard from "@/components/exchange/EthCurrencyCard";
 import UsdCurrencyCard from "@/components/exchange/UsdCurrencyCard";
 import CurrencySwapButton from "@/components/exchange/CurrencySwapButton";
+import ExchangeRate from "@/components/exchange/ExchangeRate";
 
 export default function HomeScreen() {
   return (
@@ -46,6 +47,8 @@ export default function HomeScreen() {
             <CurrencySwapButton />
             <UsdCurrencyCard />
           </View>
+
+          <ExchangeRate />
         </View>
       </ScrollView>
     </View>
