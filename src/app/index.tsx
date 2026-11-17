@@ -1,8 +1,34 @@
+import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
+      {/* Purple ambient lighting */}
+      <LinearGradient
+        colors={[
+          "rgba(105, 45, 155, 0.30)",
+          "rgba(74, 35, 115, 0.12)",
+          "transparent",
+        ]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.topGlow}
+        pointerEvents="none"
+      />
+
+      <LinearGradient
+        colors={[
+          "rgba(90, 42, 135, 0.20)",
+          "rgba(55, 30, 85, 0.08)",
+          "transparent",
+        ]}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.bottomGlow}
+        pointerEvents="none"
+      />
+
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
@@ -20,6 +46,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0B0B10",
+    overflow: "hidden",
+  },
+  topGlow: {
+    position: "absolute",
+    top: -180,
+    right: -150,
+    width: 420,
+    height: 450,
+    borderRadius: 225,
+  },
+  bottomGlow: {
+    position: "absolute",
+    bottom: -220,
+    left: -190,
+    width: 430,
+    height: 450,
+    borderRadius: 225,
   },
   scrollView: {
     flex: 1,
