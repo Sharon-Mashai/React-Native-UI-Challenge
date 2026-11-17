@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   ScrollView,
@@ -15,7 +16,14 @@ import TransactionDetails from "@/components/exchange/TransactionDetails";
 export default function HomeScreen() {
   const { width } = useWindowDimensions();
 
-  const horizontalPadding = width < 350 ? 16 : width < 400 ? 20 : 24;
+  // Keep the initial server and browser renders identical.
+  const [horizontalPadding, setHorizontalPadding] = useState(24);
+
+  // Apply the actual screen width after the component mounts.
+  useEffect(() => {
+    const padding = width < 350 ? 16 : width < 400 ? 20 : 24;
+    setHorizontalPadding(padding);
+  }, [width]);
 
   return (
     <View style={styles.container}>
