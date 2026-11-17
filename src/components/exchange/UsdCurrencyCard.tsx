@@ -10,8 +10,7 @@ export default function UsdCurrencyCard() {
           </View>
 
           <View>
-            <Text style={styles.currencyName}>US Dollar</Text>
-            <Text style={styles.currencyCode}>USD</Text>
+           <Text style={styles.currencyName}>USD</Text>
           </View>
         </View>
 

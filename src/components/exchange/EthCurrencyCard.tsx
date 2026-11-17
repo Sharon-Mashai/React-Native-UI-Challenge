@@ -10,8 +10,7 @@ export default function EthCurrencyCard() {
           </View>
 
           <View>
-            <Text style={styles.currencyName}>Ethereum</Text>
-            <Text style={styles.currencyCode}>ETH</Text>
+           <Text style={styles.currencyName}>ETH</Text>
           </View>
         </View>
 
