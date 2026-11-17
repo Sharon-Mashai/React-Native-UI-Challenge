@@ -1,14 +1,18 @@
-
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function BuyEthButton() {
+  const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
+
+  const isActive = hovered || pressed;
 
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel="Buy ETH"
+      onHoverIn={() => setHovered(true)}
+      onHoverOut={() => setHovered(false)}
       onPressIn={() => setPressed(true)}
       onPressOut={() => setPressed(false)}
       onPress={() => {}}
@@ -17,13 +21,13 @@ export default function BuyEthButton() {
       <View
         style={[
           styles.buttonContent,
-          pressed ? styles.pressedBackground : styles.normalBackground,
+          isActive ? styles.activeBackground : styles.normalBackground,
         ]}
       >
         <Text
           style={[
             styles.buttonText,
-            pressed ? styles.pressedText : styles.normalText,
+            isActive ? styles.activeText : styles.normalText,
           ]}
         >
           Buy ETH
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
   normalBackground: {
     backgroundColor: "#FFFFFF",
   },
-  pressedBackground: {
+  activeBackground: {
     backgroundColor: "#000000",
   },
   buttonText: {
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
   normalText: {
     color: "#000000",
   },
-  pressedText: {
+  activeText: {
     color: "#FFFFFF",
   },
 });
