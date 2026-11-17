@@ -1,8 +1,12 @@
+
 import { useState, type ComponentProps } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { HugeiconsIcon } from "@hugeicons/react-native";
-import { Dollar01Icon } from "@hugeicons/core-free-icons";
+import {
+  Dollar01Icon,
+  ArrowDataTransferVerticalIcon,
+} from "@hugeicons/core-free-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type IconName = ComponentProps<typeof MaterialCommunityIcons>["name"];
@@ -196,8 +200,8 @@ export default function ExchangeCurrencyPanel() {
         style={styles.swapButton}
         onPress={swapCurrencies}
       >
-        <MaterialCommunityIcons
-          name="swap-vertical"
+        <HugeiconsIcon
+          icon={ArrowDataTransferVerticalIcon}
           size={25}
           color="#FFFFFF"
         />
