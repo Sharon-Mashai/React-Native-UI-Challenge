@@ -246,18 +246,21 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     paddingBottom: 24,
     justifyContent: "space-between",
+    position: "relative",
   },
   activeSection: {
-    zIndex: 50,
-    elevation: 50,
+    zIndex: 1000,
+    elevation: 1000,
   },
   currencyInfo: {
     flexDirection: "row",
     alignItems: "center",
+    position: "relative",
+    zIndex: 1000,
   },
   selectorContainer: {
     position: "relative",
-    zIndex: 100,
+    zIndex: 2000,
     elevation: 20,
   },
   currencySelector: {
@@ -294,7 +297,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     borderWidth: 1,
     borderColor: "rgba(255, 255, 255, 0.2)",
-    zIndex: 100,
+    zIndex: 3000,
     elevation: 25,
     shadowColor: "#000000",
     shadowOffset: { width: 0, height: 8 },
